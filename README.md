@@ -2,4 +2,4 @@
 
 ## architecture
 
-![architecture](docs/architecture.svg)
+![architecture](docs/payflow-architecture.svg)
