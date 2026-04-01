@@ -4,3 +4,7 @@ Microservices-based payment system with two independent services (account manage
 ## ▪  architecture
 
 ![architecture](docs/payflow-architecture.svg)
+
+### ▪ tech stac
+
+`Java` `Spring Boot` `PostgreSQL` `Docker` `Python` `GitHub Actions` `JUnit`
