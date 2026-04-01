@@ -1,16 +1,16 @@
 # payflow
 
-### ▪  description
+## ▪  description
 
 Microservices-based payment system with two independent services (account management and transfers) running in Docker, with Python automation scripts and a full CI/CD pipeline in GitHub Actions.
 
 
-### ▪  architecture
+## ▪  architecture
 
 ![architecture](docs/payflow-architecture.svg)
 
 
-### ▪ tech stack
+## ▪ tech stack
 
 ![Java](https://img.shields.io/badge/Java-17-437291?style=flat-square&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3-6DB33F?style=flat-square&logo=springboot&logoColor=white)
