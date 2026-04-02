@@ -8,7 +8,6 @@
     --line: #cccccc;
     --box-bg: #fafafa;
     --box-stroke: #d4d4d4;
-    --accent: #2563eb;
   }
   text { font-family: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace; }
 </style>
@@ -37,8 +36,8 @@
 <text x="480" y="131" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="500" fill="var(--fg)">transfer-service</text>
 <text x="480" y="148" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">:8082</text>
 
-<line x1="376" y1="136" x2="306" y2="136" stroke="var(--accent)" stroke-width="0.8" marker-end="url(#a)"/>
-<text x="341" y="127" text-anchor="middle" font-size="8.5" fill="var(--accent)">REST</text>
+<line x1="376" y1="136" x2="306" y2="136" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="341" y="127" text-anchor="middle" font-size="8.5" fill="var(--fg2)">REST</text>
 
 <line x1="200" y1="160" x2="200" y2="210" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
 <line x1="480" y1="160" x2="480" y2="210" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
@@ -91,7 +90,7 @@
 
 <line x1="520" y1="478" x2="536" y2="478" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
 
-<rect x="538" y="462" width="106" height="32" rx="3" fill="var(--box-bg)" stroke="var(--accent)" stroke-width="0.8"/>
-<text x="591" y="478" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--accent)">deploy</text>
+<rect x="538" y="462" width="106" height="32" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.8"/>
+<text x="591" y="478" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">deploy</text>
 
 </svg>
