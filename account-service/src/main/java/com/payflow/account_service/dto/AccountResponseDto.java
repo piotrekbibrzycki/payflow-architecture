@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccountResponse {
+public class AccountResponseDto {
 
     private Long id;
     private String accountNumber;
@@ -22,8 +22,8 @@ public class AccountResponse {
     private LocalDateTime createdAt;
 
 
-    public static AccountResponse toDto(Account account) {
-        return AccountResponse.builder().id(account.getId())
+    public static AccountResponseDto toDto(Account account) {
+        return AccountResponseDto.builder().id(account.getId())
                 .accountNumber(account.getAccountNumber())
                 .ownerName(account.getOwnerName())
                 .balance(account.getBalance())

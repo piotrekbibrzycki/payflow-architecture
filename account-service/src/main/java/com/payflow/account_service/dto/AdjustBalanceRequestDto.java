@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdjustBalanceRequest {
+public class AdjustBalanceRequestDto {
 
     @NotNull(message = "Amount is required")
     private BigDecimal amount;
