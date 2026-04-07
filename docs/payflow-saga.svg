@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 540">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --fg2: #6b6b6b;
+    --fg3: #999999;
+    --line: #cccccc;
+    --box-bg: #fafafa;
+    --box-stroke: #d4d4d4;
+    --ok: #4a9a5b;
+    --fail: #c45c5c;
+  }
+  text { font-family: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace; }
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<rect width="680" height="540" fill="var(--bg)"/>
+
+<text x="340" y="28" text-anchor="middle" font-size="11" font-weight="500" fill="var(--fg)">saga pattern — transfer flow</text>
+
+<line x1="260" y1="50" x2="260" y2="70" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+
+<rect x="160" y="72" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="260" y="92" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">validate accounts</text>
+
+<line x1="360" y1="91" x2="420" y2="91" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="390" y="83" text-anchor="middle" font-size="8" fill="var(--fg2)">fail</text>
+
+<rect x="422" y="72" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--fail)" stroke-width="1.2"/>
+<text x="522" y="92" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="var(--fail)">FAILED</text>
+
+<line x1="260" y1="110" x2="260" y2="140" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="272" y="128" font-size="8" fill="var(--fg2)">success</text>
+
+<rect x="160" y="142" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="260" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">create PENDING</text>
+
+<line x1="260" y1="180" x2="260" y2="210" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="272" y="198" font-size="8" fill="var(--fg2)">success</text>
+
+<rect x="160" y="212" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="260" y="232" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">debit sender</text>
+
+<line x1="360" y1="231" x2="420" y2="231" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="390" y="223" text-anchor="middle" font-size="8" fill="var(--fg2)">fail</text>
+
+<rect x="422" y="212" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--fail)" stroke-width="1.2"/>
+<text x="522" y="232" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="var(--fail)">FAILED</text>
+
+<line x1="260" y1="250" x2="260" y2="280" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="272" y="268" font-size="8" fill="var(--fg2)">success</text>
+
+<rect x="160" y="282" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="260" y="302" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">credit receiver</text>
+
+<line x1="360" y1="301" x2="420" y2="301" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="390" y="293" text-anchor="middle" font-size="8" fill="var(--fg2)">fail</text>
+
+<rect x="422" y="282" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="522" y="302" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">compensate debit</text>
+
+<line x1="522" y1="320" x2="522" y2="350" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+
+<rect x="422" y="352" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--fail)" stroke-width="1.2"/>
+<text x="522" y="372" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="var(--fail)">FAILED</text>
+
+<text x="432" y="410" font-size="8.5" fill="var(--fg3)">account-service unavailable</text>
+<text x="432" y="422" font-size="8.5" fill="var(--fg3)">or account not found</text>
+
+<line x1="260" y1="320" x2="260" y2="350" stroke="var(--fg2)" stroke-width="0.8" marker-end="url(#a)"/>
+<text x="272" y="338" font-size="8" fill="var(--fg2)">success</text>
+
+<rect x="160" y="352" width="200" height="38" rx="3" fill="var(--box-bg)" stroke="var(--ok)" stroke-width="1.2"/>
+<text x="260" y="372" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="600" fill="var(--ok)">COMPLETED</text>
+
+</svg>
