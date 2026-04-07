@@ -10,6 +10,10 @@ Microservices-based payment system with two independent services (account manage
 ![architecture](docs/payflow-architecture.svg)
 
 
+## saga pattern
+
+!![saga](docs/payflow-saga.svg)
+
 ##  tech stack
 ![Java](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot_4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
