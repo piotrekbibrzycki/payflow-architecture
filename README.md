@@ -12,6 +12,8 @@ Microservices-based payment system with two independent services (account manage
 
 ## saga pattern
 
+When a transfer is requested, the system follows a step-by-step process. If any step fails, all previous steps get reversed so no money is lost. The transfer service talks to the account service over REST. If debiting the sender succeeds but crediting the receiver fails, the system automatically refunds the sender (compensation) and marks the transfer as FAILED.
+
 ![saga](docs/payflow-saga.svg)
 
 ##  tech stack
