@@ -27,6 +27,15 @@ The transfer service talks to the account service over REST. If debiting the sen
 
 ![saga](docs/payflow-saga.svg)
 
+
+## database per service
+
+Each microservice manages its own separate PostgreSQL database. There are no foreign keys connecting the tables. 
+
+The logical relationship between `accounts` and `transfers` is maintained strictly at the application level via REST API calls, which is why the Saga pattern is required to keep data consistent.
+
+![database](docs/database-per-service.svg)
+
 ##  tech stack
 ![Java](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot_4-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
