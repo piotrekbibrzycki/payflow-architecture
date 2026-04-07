@@ -7,12 +7,24 @@ Microservices-based payment system with two independent services (account manage
 
 ##   architecture
 
+Two independent Spring Boot services, each with its own PostgreSQL database. 
+
+Account service handles accounts and balances, transfer service handles money transfers and talks to account service over REST.
+
+Everything runs in Docker Compose. 
+
+Python scripts automate smoke testing, log analysis and deployment. 
+
+GitHub Actions runs the full CI/CD pipeline on every push.
+
 ![architecture](docs/payflow-architecture.svg)
 
 
 ## saga pattern
 
-When a transfer is requested, the system follows a step-by-step process. If any step fails, all previous steps get reversed so no money is lost. The transfer service talks to the account service over REST. If debiting the sender succeeds but crediting the receiver fails, the system automatically refunds the sender (compensation) and marks the transfer as FAILED.
+When a transfer is requested, the system follows a step-by-step process. If any step fails, all previous steps get reversed so no money is lost. 
+
+The transfer service talks to the account service over REST. If debiting the sender succeeds but crediting the receiver fails, the system automatically refunds the sender (compensation) and marks the transfer as FAILED.
 
 ![saga](docs/payflow-saga.svg)
 
