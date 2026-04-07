@@ -1,4 +1,6 @@
-# payflow
+<div align="center">
+  <h1> payflow </h1>
+</div>
 
 ##   description
 
@@ -9,13 +11,10 @@ Microservices-based payment system with two independent services (account manage
 
 Two independent Spring Boot services, each with its own PostgreSQL database. 
 
-Account service handles accounts and balances, transfer service handles money transfers and talks to account service over REST.
+* **Account Service** handles accounts and balances.
+* **Transfer Service** handles money transfers and talks to the account service over REST.
 
-Everything runs in Docker Compose. 
-
-Python scripts automate smoke testing, log analysis and deployment. 
-
-GitHub Actions runs the full CI/CD pipeline on every push.
+Everything runs in Docker Compose. Python scripts automate smoke testing, log analysis, and deployment. GitHub Actions runs the full CI/CD pipeline on every push.
 
 ![architecture](docs/payflow-architecture.svg)
 
