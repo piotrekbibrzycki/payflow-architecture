@@ -33,6 +33,32 @@ services:
       timeout: 5s
       retries: 5
 
+  account-service:
+    build:
+      context: ./account-service
+    container_name: account-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      account-db:
+        condition: service_healthy
+
+  transfer-service:
+    build:
+      context: ./transfer-service
+    container_name: transfer-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      transfer-db:
+        condition: service_healthy
+      account-service:
+        condition: service_started
+
 volumes:
   account-data:
   transfer-data:
