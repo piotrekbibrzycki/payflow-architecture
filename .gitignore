@@ -6,3 +6,5 @@ target/
 venv/
 transfer.txt
 account.txt
+log/
+*.log
