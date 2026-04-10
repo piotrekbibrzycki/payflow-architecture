@@ -34,6 +34,11 @@ The logical relationship between `accounts` and `transfers` is maintained strict
 
 ![database](docs/database-per-service.svg)
 
+## CI pipeline
+GitHub Actions runs the validation pipeline on every push. It executes unit tests for both services, starts the Docker Compose environment, and runs the smoke test to verify the critical transfer flow. This makes sure the project is checked both at the code level and at the full system level.
+
+![ci-pipeline](docs/ci-pipeline.svg)
+
 ##  tech stack
 
 
