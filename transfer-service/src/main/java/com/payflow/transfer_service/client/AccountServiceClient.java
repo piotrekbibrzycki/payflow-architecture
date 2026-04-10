@@ -1,27 +1,25 @@
 package com.payflow.transfer_service.client;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestClient;
 
 import java.math.BigDecimal;
 import java.util.Map;
-
 @Slf4j
 @Component
 public class AccountServiceClient {
 
-    private final WebClient webClient;
+    private final RestClient restClient;
 
     public AccountServiceClient(@Value("${account-service.url}") String accountServiceUrl) {
-        this.webClient = WebClient.builder().baseUrl(accountServiceUrl).build();
+        this.restClient = RestClient.builder().baseUrl(accountServiceUrl).build();
     }
 
     public boolean accountExists(String accountNumber) {
         try {
-            webClient.get().uri("/api/accounts/number/{number}", accountNumber).retrieve().toBodilessEntity().block();
+            restClient.get().uri("/api/accounts/number/{number}", accountNumber).retrieve().toBodilessEntity();
             return true;
         } catch (Exception e) {
             log.warn("Account not found or service unavailable: number = {}", accountNumber);
@@ -31,9 +29,8 @@ public class AccountServiceClient {
 
     public Long getAccountIdByNumber(String accountNumber) {
         try {
-            AccountDto response = webClient.get().uri("/api/accounts/number/{number}", accountNumber).retrieve()
-                    .bodyToMono(AccountDto.class)
-                    .block();
+            AccountDto response = restClient.get().uri("/api/accounts/number/{number}", accountNumber).retrieve()
+                    .body(AccountDto.class);
 
             if (response != null) {
                 return response.getId();
@@ -47,7 +44,7 @@ public class AccountServiceClient {
 
     public boolean adjustBalance(Long accountId, BigDecimal amount) {
         try {
-            webClient.patch().uri("/api/accounts/{id}/balance", accountId).bodyValue(Map.of("amount", amount)).retrieve().toBodilessEntity().block();
+            restClient.patch().uri("/api/accounts/{id}/balance", accountId).body(Map.of("amount", amount)).retrieve().toBodilessEntity();
             log.info("Balance adjusted: accountId={} amount={}", accountId, amount);
             return true;
         }
