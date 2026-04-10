@@ -2,7 +2,9 @@
 
 ##   description
 
-Microservices-based payment system with two independent services (account management and transfers) running in Docker. Includes Python smoke testing, Flyway database migrations, and a GitHub Actions CI pipeline for automated validation.
+Microservices-based payment system with two independent services (account management and transfers) running in Docker.
+
+Includes Python smoke testing, Flyway database migrations, and a GitHub Actions CI pipeline for automated validation.
 
 
 ##   architecture
