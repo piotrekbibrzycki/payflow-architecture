@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 540">
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 320">
 <style>
   :root {
     --bg: #ffffff;
@@ -17,7 +17,7 @@
   </marker>
 </defs>
 
-<rect width="680" height="540" fill="var(--bg)"/>
+<rect width="680" height="320" fill="var(--bg)"/>
 
 <rect x="274" y="24" width="132" height="34" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
 <text x="340" y="44" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--fg)">client</text>
@@ -26,7 +26,7 @@
 <line x1="375" y1="58" x2="465" y2="102" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
 
 <rect x="56" y="88" width="568" height="195" rx="4" fill="none" stroke="var(--line)" stroke-width="0.7" stroke-dasharray="4 3"/>
-<text x="72" y="102" font-size="9" fill="var(--fg3)" letter-spacing="0.5">docker-compose</text>
+<text x="72" y="102" font-size="9" fill="var(--fg3)" letter-spacing="0.5">docker-compose runtime</text>
 
 <rect x="96" y="112" width="208" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
 <text x="200" y="131" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="500" fill="var(--fg)">account-service</text>
@@ -49,48 +49,5 @@
 <rect x="400" y="210" width="160" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
 <text x="480" y="229" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--fg)">transfer-db</text>
 <text x="480" y="246" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">postgres :5434</text>
-
-<line x1="56" y1="310" x2="624" y2="310" stroke="var(--line)" stroke-width="0.3"/>
-
-<text x="340" y="334" text-anchor="middle" font-size="9.5" fill="var(--fg3)" letter-spacing="0.3">scripts/</text>
-
-<rect x="40" y="350" width="184" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
-<text x="132" y="369" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--fg)">smoke_test.py</text>
-<text x="132" y="386" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">health + api checks</text>
-
-<rect x="248" y="350" width="184" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
-<text x="340" y="369" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--fg)">log_analyzer.py</text>
-<text x="340" y="386" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">parse + error reports</text>
-
-<rect x="456" y="350" width="184" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
-<text x="548" y="369" text-anchor="middle" dominant-baseline="central" font-size="11" fill="var(--fg)">deploy.py</text>
-<text x="548" y="386" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">build · deploy · test</text>
-
-<line x1="56" y1="424" x2="624" y2="424" stroke="var(--line)" stroke-width="0.3"/>
-
-<text x="340" y="448" text-anchor="middle" font-size="9.5" fill="var(--fg3)" letter-spacing="0.3">github actions</text>
-
-<rect x="36" y="462" width="106" height="32" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
-<text x="89" y="478" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">build + test</text>
-
-<line x1="142" y1="478" x2="158" y2="478" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
-
-<rect x="160" y="462" width="106" height="32" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
-<text x="213" y="478" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">lint + mypy</text>
-
-<line x1="266" y1="478" x2="282" y2="478" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
-
-<rect x="284" y="462" width="106" height="32" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
-<text x="337" y="478" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">docker build</text>
-
-<line x1="390" y1="478" x2="406" y2="478" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
-
-<rect x="408" y="462" width="112" height="32" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
-<text x="464" y="478" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">smoke tests</text>
-
-<line x1="520" y1="478" x2="536" y2="478" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
-
-<rect x="538" y="462" width="106" height="32" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.8"/>
-<text x="591" y="478" text-anchor="middle" dominant-baseline="central" font-size="10" fill="var(--fg)">deploy</text>
 
 </svg>
