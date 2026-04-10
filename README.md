@@ -44,7 +44,6 @@ GitHub Actions runs the validation pipeline on every push. It executes unit test
 After starting the application, Swagger UI is available at:
 
   * Account Service: `http://localhost:8081/swagger-ui/index.html`
-  
   * Transfer Service: `http://localhost:8082/swagger-ui/index.html`
 
 ##  tech stack
