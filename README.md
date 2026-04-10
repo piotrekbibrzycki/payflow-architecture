@@ -2,7 +2,7 @@
 
 ##   description
 
-Microservices-based payment system with two independent services (account management and transfers) running in Docker, with Python automation scripts and a full CI/CD pipeline in GitHub Actions.
+Microservices-based payment system with two independent services (account management and transfers) running in Docker. Includes Python smoke testing and a GitHub Actions CI pipeline for automated validation.
 
 
 ##   architecture
@@ -12,7 +12,7 @@ Two independent Spring Boot services, each with its own PostgreSQL database.
 * `Account Service` handles accounts and balances.
 * `Transfer Service` handles money transfers and talks to the account service over REST.
 
-Everything runs in Docker Compose. Python scripts automate smoke testing, log analysis, and deployment. GitHub Actions runs the full CI/CD pipeline on every push.
+Everything runs in Docker Compose. Everything runs in Docker Compose. A Python smoke test validates the critical transfer flow after startup. GitHub Actions runs unit tests, starts the Docker environment, and executes smoke tests on every push.
 
 ![architecture](docs/payflow-architecture.svg)
 
@@ -33,6 +33,18 @@ Each microservice manages its own separate PostgreSQL database. There are no for
 The logical relationship between `accounts` and `transfers` is maintained strictly at the application level via REST API calls, which is why the Saga pattern is required to keep data consistent.
 
 ![database](docs/database-per-service.svg)
+
+## CI pipeline
+GitHub Actions runs the validation pipeline on every push. It executes unit tests for both services, starts the Docker Compose environment, and runs the smoke test to verify the critical transfer flow. This makes sure the project is checked both at the code level and at the full system level.
+
+![ci-pipeline](docs/ci-pipeline.svg)
+
+## API documentation
+
+After starting the application, Swagger UI is available at:
+
+  * Account Service: `http://localhost:8081/swagger-ui/index.html`
+  * Transfer Service: `http://localhost:8082/swagger-ui/index.html`
 
 ##  tech stack
 

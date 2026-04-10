@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="160" viewBox="0 0 680 160">
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --fg2: #6b6b6b;
+    --fg3: #999999;
+    --line: #cccccc;
+    --box-bg: #fafafa;
+    --box-stroke: #d4d4d4;
+  }
+  text { font-family: "SF Mono", "Cascadia Code", "Fira Code", Consolas, monospace; }
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M2 2L8 5L2 8" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<rect width="680" height="160" fill="var(--bg)"/>
+
+<text x="340" y="18" text-anchor="middle" font-size="11" font-weight="500" fill="var(--fg)">CI pipeline</text>
+
+<rect x="20" y="28" width="640" height="100" rx="4" fill="none" stroke="var(--line)" stroke-width="0.7" stroke-dasharray="4 3"/>
+<text x="36" y="42" font-size="9" fill="var(--fg3)" letter-spacing="0.5">github-actions</text>
+
+<rect x="32" y="60" width="90" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="77" y="79" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="500" fill="var(--fg)">checkout</text>
+<text x="77" y="96" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">source code</text>
+
+<line x1="122" y1="84" x2="142" y2="84" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
+
+<rect x="142" y="60" width="110" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="197" y="79" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="500" fill="var(--fg)">setup</text>
+<text x="197" y="96" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">java + python</text>
+
+<line x1="252" y1="84" x2="272" y2="84" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
+
+<rect x="272" y="60" width="90" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="317" y="79" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="500" fill="var(--fg)">test</text>
+<text x="317" y="96" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">unit tests</text>
+
+<line x1="362" y1="84" x2="382" y2="84" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
+
+<rect x="382" y="60" width="120" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="442" y="79" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="500" fill="var(--fg)">deploy</text>
+<text x="442" y="96" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">docker compose up</text>
+
+<line x1="502" y1="84" x2="522" y2="84" stroke="var(--line)" stroke-width="0.8" marker-end="url(#a)"/>
+
+<rect x="522" y="60" width="126" height="48" rx="3" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.7"/>
+<text x="585" y="79" text-anchor="middle" dominant-baseline="central" font-size="11" font-weight="500" fill="var(--fg)">verify</text>
+<text x="585" y="96" text-anchor="middle" dominant-baseline="central" font-size="9.5" fill="var(--fg3)">smoke &amp; clean</text>
+
+</svg>
