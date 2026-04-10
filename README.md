@@ -50,7 +50,25 @@ After starting the application, Swagger UI is available at:
 
 Database schema changes are managed with `Flyway`. Each service applies its own migrations independently at startup, which keeps the schema aligned with the service that owns the data.
 
-##  tech stack
 
+## run locally
+
+Clone the repository and start the full environment with Docker Compose:
+
+```bash
+docker compose up -d --build
+```
+To verify the critical transfer flow:
+```bash
+python scripts/smoke_test.py
+```
+To stop the environment:
+```bash
+docker compose down -v
+```
+
+
+
+##  tech stack
 
 [![My Stack](https://skillicons.dev/icons?i=java,spring,postgres,docker,py,githubactions&theme=light)](https://skillicons.dev)
