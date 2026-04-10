@@ -2,7 +2,7 @@
 
 ##   description
 
-Microservices-based payment system with two independent services (account management and transfers) running in Docker. Includes Python smoke testing and a GitHub Actions CI pipeline for automated validation.
+Microservices-based payment system with two independent services (account management and transfers) running in Docker. Includes Python smoke testing, Flyway database migrations, and a GitHub Actions CI pipeline for automated validation.
 
 
 ##   architecture
@@ -12,7 +12,7 @@ Two independent Spring Boot services, each with its own PostgreSQL database.
 * `Account Service` handles accounts and balances.
 * `Transfer Service` handles money transfers and talks to the account service over REST.
 
-Everything runs in Docker Compose. Everything runs in Docker Compose. A Python smoke test validates the critical transfer flow after startup. GitHub Actions runs unit tests, starts the Docker environment, and executes smoke tests on every push.
+Everything runs in Docker Compose. A Python smoke test validates the critical transfer flow after startup. GitHub Actions runs unit tests, starts the Docker environment, and executes smoke tests on every push.
 
 ![architecture](docs/payflow-architecture.svg)
 
@@ -46,7 +46,29 @@ After starting the application, Swagger UI is available at:
   * Account Service: `http://localhost:8081/swagger-ui/index.html`
   * Transfer Service: `http://localhost:8082/swagger-ui/index.html`
 
-##  tech stack
+## database migrations
 
+Database schema changes are managed with `Flyway`. Each service applies its own migrations independently at startup, which keeps the schema aligned with the service that owns the data.
+
+
+## run locally
+
+Clone the repository and start the full environment with Docker Compose:
+
+```bash
+docker compose up -d --build
+```
+To verify the critical transfer flow:
+```bash
+python scripts/smoke_test.py
+```
+To stop the environment:
+```bash
+docker compose down -v
+```
+
+
+
+##  tech stack
 
 [![My Stack](https://skillicons.dev/icons?i=java,spring,postgres,docker,py,githubactions&theme=light)](https://skillicons.dev)
