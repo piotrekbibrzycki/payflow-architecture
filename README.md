@@ -2,7 +2,9 @@
 
 ##   description
 
-Microservices-based payment system with two independent services (account management and transfers) running in Docker. Includes Python smoke testing, Flyway database migrations, and a GitHub Actions CI pipeline for automated validation.
+Microservices-based payment system with two independent services (account management and transfers) running in Docker.
+
+Includes Python smoke testing, Flyway database migrations, and a GitHub Actions CI pipeline for automated validation.
 
 
 ##   architecture
@@ -39,17 +41,16 @@ GitHub Actions runs the validation pipeline on every push. It executes unit test
 
 ![ci-pipeline](docs/ci-pipeline.svg)
 
+## database migrations
+
+Database schema changes are managed with `Flyway`. Each service applies its own migrations independently at startup, which keeps the schema aligned with the service that owns the data.
+
 ## API documentation
 
 After starting the application, Swagger UI is available at:
 
   * Account Service: `http://localhost:8081/swagger-ui/index.html`
   * Transfer Service: `http://localhost:8082/swagger-ui/index.html`
-
-## database migrations
-
-Database schema changes are managed with `Flyway`. Each service applies its own migrations independently at startup, which keeps the schema aligned with the service that owns the data.
-
 
 ## run locally
 
