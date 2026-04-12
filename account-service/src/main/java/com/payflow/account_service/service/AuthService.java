@@ -6,7 +6,9 @@ import com.payflow.account_service.model.Role;
 import com.payflow.account_service.model.User;
 import com.payflow.account_service.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthService {
 
     private final UserRepository userRepository;
