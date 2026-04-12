@@ -1,0 +1,41 @@
+package com.payflow.account_service.service;
+
+import com.payflow.account_service.dto.LoginRequestDto;
+import com.payflow.account_service.dto.RegisterRequestDto;
+import com.payflow.account_service.model.Role;
+import com.payflow.account_service.model.User;
+import com.payflow.account_service.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+public class AuthService {
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public void register(RegisterRequestDto request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new IllegalArgumentException("User with this email already exists");
+        }
+
+        User user = User.builder().email(request.getEmail()).passwordHash(passwordEncoder.encode(request.getPassword()))
+                .role(Role.USER).build();
+
+        userRepository.save(user);
+    }
+
+    public void login(LoginRequestDto request) {
+        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+
+
+        boolean passwordMatches = passwordEncoder.matches(request.getPassword(), user.getPasswordHash());
+
+        if (!passwordMatches) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+    }
+}
