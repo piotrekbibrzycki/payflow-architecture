@@ -1,5 +1,6 @@
 package com.payflow.account_service.controller;
 
+import com.payflow.account_service.dto.AuthResponseDto;
 import com.payflow.account_service.dto.LoginRequestDto;
 import com.payflow.account_service.dto.RegisterRequestDto;
 import com.payflow.account_service.service.AuthService;
@@ -28,8 +29,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequestDto request) {
-        authService.login(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<AuthResponseDto> login(@Valid @RequestBody LoginRequestDto request) {
+        String token = authService.login(request);
+        return ResponseEntity.ok(new AuthResponseDto(token));
     }
 }
