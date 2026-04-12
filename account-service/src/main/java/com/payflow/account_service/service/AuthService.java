@@ -13,10 +13,12 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public void register(RegisterRequestDto request) {
@@ -30,7 +32,7 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    public void login(LoginRequestDto request) {
+    public String login(LoginRequestDto request) {
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
 
@@ -39,5 +41,6 @@ public class AuthService {
         if (!passwordMatches) {
             throw new IllegalArgumentException("Invalid email or password");
         }
+        return jwtService.generateToken(user);
     }
 }
