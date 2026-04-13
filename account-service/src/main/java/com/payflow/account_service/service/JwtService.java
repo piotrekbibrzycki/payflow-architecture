@@ -36,14 +36,18 @@ public class JwtService {
         return extractAllClaims(token).get("role", String.class);
     }
 
-    public boolean isTokenValid(String token) {
+    public boolean isTokenValid(String token, String email) {
         try {
-            extractAllClaims(token);
-            return true;
+            String extractedEmail = extractEmail(token);
+            return extractedEmail.equals(email) && !isTokenExpired(token);
         }
         catch (Exception e) {
             return false;
         }
+    }
+
+    private boolean isTokenExpired(String token) {
+        return extractAllClaims(token).getExpiration().before(new Date());
     }
 
     public Claims extractAllClaims(String token) {
