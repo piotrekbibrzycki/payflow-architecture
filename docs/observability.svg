@@ -61,16 +61,14 @@
 
 <line x1="470" y1="299" x2="494" y2="299" stroke="var(--line)" stroke-width="0.8" stroke-dasharray="4 3"/>
 
-<line x1="80" y1="340" x2="600" y2="340" stroke="var(--line)" stroke-width="0.5"/>
+<text x="340" y="348" text-anchor="middle" font-size="9" fill="var(--fg3)" letter-spacing="0.3">log output (console / ELK)</text>
 
-<text x="340" y="358" text-anchor="middle" font-size="9" fill="var(--fg3)" letter-spacing="0.3">log output (console / ELK)</text>
+<rect x="70" y="364" width="540" height="22" rx="2" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.5"/>
+<text x="82" y="375" dominant-baseline="central" font-size="9" fill="var(--fg3)">transfer-service</text>
+<text x="180" y="375" dominant-baseline="central" font-size="9" fill="var(--fg)"> [abc-123] Transfer created: id=1</text>
 
-<rect x="70" y="374" width="540" height="22" rx="2" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.5"/>
-<text x="82" y="385" dominant-baseline="central" font-size="9" fill="var(--fg3)">transfer-service</text>
-<text x="180" y="385" dominant-baseline="central" font-size="9" fill="var(--fg)"> [abc-123] Transfer created: id=1</text>
-
-<rect x="70" y="400" width="540" height="22" rx="2" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.5"/>
-<text x="82" y="411" dominant-baseline="central" font-size="9" fill="var(--fg3)">account-service</text>
-<text x="180" y="411" dominant-baseline="central" font-size="9" fill="var(--fg)"> [abc-123] Balance adjusted: id=2</text>
+<rect x="70" y="394" width="540" height="22" rx="2" fill="var(--box-bg)" stroke="var(--box-stroke)" stroke-width="0.5"/>
+<text x="82" y="405" dominant-baseline="central" font-size="9" fill="var(--fg3)">account-service</text>
+<text x="180" y="405" dominant-baseline="central" font-size="9" fill="var(--fg)"> [abc-123] Balance adjusted: id=2</text>
 
 </svg>
