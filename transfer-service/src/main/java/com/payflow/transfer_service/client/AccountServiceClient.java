@@ -2,6 +2,8 @@ package com.payflow.transfer_service.client;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -19,7 +21,18 @@ public class AccountServiceClient {
 
     public boolean accountExists(String accountNumber) {
         try {
-            restClient.get().uri("/api/accounts/number/{number}", accountNumber).retrieve().toBodilessEntity();
+            String authHeader = getAuthorizationHeader();
+
+            restClient.get()
+                    .uri("/api/accounts/number/{number}", accountNumber)
+                    .headers(headers -> {
+                        if (authHeader != null) {
+                            headers.set("Authorization", authHeader);
+                        }
+                    })
+                    .retrieve()
+                    .toBodilessEntity();
+
             return true;
         } catch (Exception e) {
             log.warn("Account not found or service unavailable: number = {}", accountNumber);
@@ -29,7 +42,16 @@ public class AccountServiceClient {
 
     public Long getAccountIdByNumber(String accountNumber) {
         try {
-            AccountDto response = restClient.get().uri("/api/accounts/number/{number}", accountNumber).retrieve()
+            String authHeader = getAuthorizationHeader();
+
+            AccountDto response = restClient.get()
+                    .uri("/api/accounts/number/{number}", accountNumber)
+                    .headers(headers -> {
+                        if (authHeader != null) {
+                            headers.set("Authorization", authHeader);
+                        }
+                    })
+                    .retrieve()
                     .body(AccountDto.class);
 
             if (response != null) {
@@ -44,13 +66,34 @@ public class AccountServiceClient {
 
     public boolean adjustBalance(Long accountId, BigDecimal amount) {
         try {
-            restClient.patch().uri("/api/accounts/{id}/balance", accountId).body(Map.of("amount", amount)).retrieve().toBodilessEntity();
+            String authHeader = getAuthorizationHeader();
+
+            restClient.patch()
+                    .uri("/api/accounts/{id}/balance", accountId)
+                    .headers(headers -> {
+                        if (authHeader != null) {
+                            headers.set("Authorization", authHeader);
+                        }
+                    })
+                    .body(Map.of("amount", amount))
+                    .retrieve()
+                    .toBodilessEntity();
+
             log.info("Balance adjusted: accountId={} amount={}", accountId, amount);
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Failed to adjust balance: accountId={}, amount={}, error={}", accountId, amount, e.getMessage());
             return false;
         }
+    }
+
+    private String getAuthorizationHeader() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || authentication.getCredentials() == null) {
+            return null;
+        }
+
+        return "Bearer " + authentication.getCredentials().toString();
     }
 }
