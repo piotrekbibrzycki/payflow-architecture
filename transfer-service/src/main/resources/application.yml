@@ -18,5 +18,9 @@ spring:
       hibernate:
         format_sql: true
 
+
 account-service:
   url: http://localhost:8081
+
+jwt:
+  secret: c3VwZXJzZWNyZXRrZXlmb3Jqd3RzaG91bGRiZWF0bGVhc3QzMmJ5dGVzbG9uZw==
