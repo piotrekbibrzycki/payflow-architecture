@@ -2,9 +2,11 @@
 
 ##   description
 
-Microservices-based payment system with two independent services (account management and transfers) running in Docker.
+Microservices-based payment system built with Java 21 and Spring Boot 4.
 
-Includes Python smoke testing, Flyway database migrations, and a GitHub Actions CI pipeline for automated validation.
+Two independent services handle account management and money transfers, each with its own PostgreSQL database, connected over REST. Transfers follow the Saga pattern with automatic compensation on failure, so no money is ever lost.
+
+The system includes JWT authentication with role-based access control, Flyway database migrations, structured logging with correlation IDs across services, Docker Compose orchestration, Python smoke testing, and a GitHub Actions CI pipeline
 
 
 ##   architecture
@@ -25,8 +27,29 @@ When a transfer is requested, the system follows a step-by-step process. If any 
 
 The transfer service talks to the account service over REST. If debiting the sender succeeds but crediting the receiver fails, the system automatically refunds the sender (compensation) and marks the transfer as FAILED.
 
+If compensation fails, the system logs a CRITICAL error with the transfer ID for manual intervention.
+
 ![saga](docs/payflow-saga.svg)
 
+## security
+
+Authentication and authorization are handled through JWT tokens issued by the account service. Users register and log in through dedicated auth endpoints. Passwords are hashed with BCrypt and never stored in plain text.
+
+After a successful login, the server returns a signed JWT containing the user's email and role. Both services validate this token on every request using a shared secret key. Role-based access control restricts account creation to ADMIN users, while any authenticated user can perform transfers and read data.
+
+The transfer service does not manage users or issue tokens. It only validates tokens issued by the account service, keeping the auth logic in one place. A default admin account is seeded via Flyway migration so the system is functional immediately after startup.
+
+![security](docs/jwt-authentication.svg)
+
+## observability
+
+Each service includes a correlation ID filter that tags every request with a unique `X-Correlation-Id` header. If the client sends a correlation ID, both services propagate it across the entire request chain. If no ID is provided, the first service generates one automatically.
+
+The correlation ID appears in every log line via SLF4J MDC, making it possible to trace a single transfer across both services and their databases. The transfer service forwards the correlation ID to the account service on every REST call, so a single request can be followed end-to-end through the logs.
+
+Spring Boot Actuator exposes a public `/actuator/health` endpoint for container health checks and monitoring.
+
+![observability](docs/observability.svg)
 
 ## database per service
 
@@ -43,7 +66,7 @@ GitHub Actions runs the validation pipeline on every push. It executes unit test
 
 ## database migrations
 
-Database schema changes are managed with `Flyway`. Each service applies its own migrations independently at startup, which keeps the schema aligned with the service that owns the data.
+Database schema changes are managed with Flyway. Each service applies its own migrations independently at startup, which keeps the schema aligned with the service that owns the data.
 
 ## API documentation
 
