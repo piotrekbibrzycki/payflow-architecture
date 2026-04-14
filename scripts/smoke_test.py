@@ -3,21 +3,70 @@ import sys
 import logging
 from uuid import uuid4
 
-logging.basicConfig(level=logging.INFO, format = '%(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
+AUTH_API_URL = "http://localhost:8081/api/auth/login"
 ACCOUNT_API_URL = "http://localhost:8081/api/accounts"
 TRANSFER_API_URL = "http://localhost:8082/api/transfers"
 TIMEOUT = 5
 
+ADMIN_EMAIL = "admin@payflow.local"
+ADMIN_PASSWORD = "secret123"
+
 test_id = uuid4().hex[:8].upper()
+
+
+def login_and_get_token():
+    response = requests.post(
+        AUTH_API_URL,
+        json={
+            "email": ADMIN_EMAIL,
+            "password": ADMIN_PASSWORD
+        },
+        timeout=TIMEOUT
+    )
+
+    if response.status_code != 200:
+        logging.error(
+            f"Failed to login admin. "
+            f"Status: {response.status_code}, body: {response.text}"
+        )
+        sys.exit(1)
+
+    token = response.json().get("token")
+
+    if not token:
+        logging.error("Login response did not contain a token")
+        sys.exit(1)
+
+    return token
+
 
 def test_critical_path():
     logging.info("Starting smoke tests: testing critical path")
-    sender_account = {"accountNumber": f"TEST-{test_id}-001", "ownerName": "sender", "balance": 500.0, "currency": "PLN"}
-    receiver_account =  {"accountNumber": f"TEST-{test_id}-002", "ownerName" : "receiver", "balance": 300.0, "currency": "PLN"}
+    token = login_and_get_token()
+    headers = {"Authorization": f"Bearer {token}"}
+
+    sender_account = {
+        "accountNumber": f"TEST-{test_id}-001",
+        "ownerName": "sender",
+        "balance": 500.0,
+        "currency": "PLN"
+    }
+    receiver_account = {
+        "accountNumber": f"TEST-{test_id}-002",
+        "ownerName": "receiver",
+        "balance": 300.0,
+        "currency": "PLN"
+    }
 
     try:
-        sender_resp = requests.post(ACCOUNT_API_URL, json=sender_account, timeout=TIMEOUT)
+        sender_resp = requests.post(
+            ACCOUNT_API_URL,
+            json=sender_account,
+            headers=headers,
+            timeout=TIMEOUT
+        )
         if sender_resp.status_code != 201:
             logging.error(
                 f"Failed to create sender account. "
@@ -25,7 +74,12 @@ def test_critical_path():
             )
             sys.exit(1)
 
-        receiver_resp = requests.post(ACCOUNT_API_URL, json=receiver_account, timeout=TIMEOUT)
+        receiver_resp = requests.post(
+            ACCOUNT_API_URL,
+            json=receiver_account,
+            headers=headers,
+            timeout=TIMEOUT
+        )
         if receiver_resp.status_code != 201:
             logging.error(
                 f"Failed to create receiver account. "
@@ -43,12 +97,18 @@ def test_critical_path():
             "currency": "PLN"
         }
 
-        transfer_resp = requests.post(TRANSFER_API_URL, json=transfer, timeout = TIMEOUT)
+        transfer_resp = requests.post(
+            TRANSFER_API_URL,
+            json=transfer,
+            headers=headers,
+            timeout=TIMEOUT
+        )
 
         if transfer_resp.status_code != 201:
-            logging.error(f"Transfer rejected. HTTP Status: {transfer_resp.status_code}, body: {transfer_resp.text}")
+            logging.error(
+                f"Transfer rejected. HTTP Status: {transfer_resp.status_code}, body: {transfer_resp.text}"
+            )
             sys.exit(1)
-
 
         transfer_data = transfer_resp.json()
         transfer_id = transfer_data.get("id")
@@ -65,7 +125,11 @@ def test_critical_path():
             )
             sys.exit(1)
 
-        verify_transfer_resp = requests.get(f"{TRANSFER_API_URL}/{transfer_id}", timeout=TIMEOUT)
+        verify_transfer_resp = requests.get(
+            f"{TRANSFER_API_URL}/{transfer_id}",
+            headers=headers,
+            timeout=TIMEOUT
+        )
 
         if verify_transfer_resp.status_code != 200:
             logging.error(
@@ -84,6 +148,7 @@ def test_critical_path():
 
         sender_check_resp = requests.get(
             f"{ACCOUNT_API_URL}/number/{sender_account['accountNumber']}",
+            headers=headers,
             timeout=TIMEOUT
         )
         if sender_check_resp.status_code != 200:
@@ -92,6 +157,7 @@ def test_critical_path():
 
         receiver_check_resp = requests.get(
             f"{ACCOUNT_API_URL}/number/{receiver_account['accountNumber']}",
+            headers=headers,
             timeout=TIMEOUT
         )
         if receiver_check_resp.status_code != 200:
@@ -116,8 +182,6 @@ def test_critical_path():
         sys.exit(1)
 
 
-
 if __name__ == "__main__":
     test_critical_path()
     sys.exit(0)
-
