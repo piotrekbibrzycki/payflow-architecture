@@ -1,6 +1,7 @@
 package com.payflow.transfer_service.client;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +30,10 @@ public class AccountServiceClient {
                         if (authHeader != null) {
                             headers.set("Authorization", authHeader);
                         }
+                        String correlationId = getCorrelationId();
+                        if (correlationId != null) {
+                            headers.set("X-Correlation-Id", correlationId);
+                        }
                     })
                     .retrieve()
                     .toBodilessEntity();
@@ -49,6 +54,11 @@ public class AccountServiceClient {
                     .headers(headers -> {
                         if (authHeader != null) {
                             headers.set("Authorization", authHeader);
+                        }
+
+                        String correlationId = getCorrelationId();
+                        if (correlationId != null) {
+                            headers.set("X-Correlation-Id", correlationId);
                         }
                     })
                     .retrieve()
@@ -74,6 +84,11 @@ public class AccountServiceClient {
                         if (authHeader != null) {
                             headers.set("Authorization", authHeader);
                         }
+
+                        String correlationId = getCorrelationId();
+                        if (correlationId != null) {
+                            headers.set("X-Correlation-Id", correlationId);
+                        }
                     })
                     .body(Map.of("amount", amount))
                     .retrieve()
@@ -95,5 +110,9 @@ public class AccountServiceClient {
         }
 
         return "Bearer " + authentication.getCredentials().toString();
+    }
+
+    private String getCorrelationId() {
+        return MDC.get("correlationId");
     }
 }
