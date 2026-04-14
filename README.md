@@ -69,7 +69,6 @@ docker compose down -v
 ```
 
 
-
 ##  tech stack
 
 [![My Stack](https://skillicons.dev/icons?i=java,spring,postgres,docker,py,githubactions&theme=light)](https://skillicons.dev)
